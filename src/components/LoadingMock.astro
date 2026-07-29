@@ -1,0 +1,80 @@
+---
+
+---
+
+<script is:inline>
+	const mockMapImage =
+		"data:image/svg+xml;charset=utf-8," +
+		encodeURIComponent(`
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+				<defs>
+					<linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+						<stop offset="0" stop-color="#8ed0f6"/>
+						<stop offset="0.58" stop-color="#f0d999"/>
+						<stop offset="1" stop-color="#646d47"/>
+					</linearGradient>
+				</defs>
+				<rect width="256" height="256" fill="url(#sky)"/>
+				<path d="M0 152 C42 132 74 160 112 138 C150 116 184 146 256 122 L256 256 L0 256 Z" fill="#6f7941"/>
+				<path d="M0 188 C48 174 78 208 118 184 C164 158 190 194 256 170 L256 256 L0 256 Z" fill="#384422"/>
+				<rect x="48" y="116" width="38" height="80" fill="#a46b35"/>
+				<rect x="94" y="92" width="56" height="104" fill="#76513a"/>
+				<rect x="158" y="128" width="44" height="68" fill="#b3834a"/>
+				<path d="M34 196 H218 L238 232 H16 Z" fill="#1f2422" opacity=".85"/>
+			</svg>
+		`);
+
+	const mock = {
+		servername: "construction site kitchen Activity Bag mock",
+		serverurl: "https://cdn.example.test/gmod/fastdl",
+		mapname: "gm_fakestruct",
+		maxplayers: 32,
+		steamid: "76561198100962610",
+		gamemode: "sandbox",
+		volume: 0.75,
+		lang: "en",
+		gamemodeNice: "Sandboxtuah",
+		filesTotal: 184,
+		filesNeeded: 47,
+		statuses: [
+			"Sending client info...",
+			"Workshop complete: 214/214 addons mounted",
+			"Lua cache ready",
+			"Downloading materials/models/props_lab/security_screens2.vtf",
+			"Downloading sound/vehicles/v8/start_loop.wav",
+			"Retrieving server info..."
+		]
+	};
+
+	window.__loadingMockMapImages = {
+		...(window.__loadingMockMapImages || {}),
+		[mock.mapname]: mockMapImage
+	};
+
+	document.addEventListener("DOMContentLoaded", function () {
+		window.GameDetails(
+			mock.servername,
+			mock.serverurl,
+			mock.mapname,
+			mock.maxplayers,
+			mock.steamid,
+			mock.gamemode,
+			mock.volume,
+			mock.lang,
+			mock.gamemodeNice
+		);
+		window.SetFilesTotal(mock.filesTotal);
+		window.SetFilesNeeded(mock.filesNeeded);
+
+		mock.statuses.forEach(function (status, index) {
+			if (status.startsWith("Downloading ")) {
+				window.DownloadingFile(status.replace("Downloading ", ""));
+				return;
+			}
+
+			window.SetStatusChanged(status);
+			window.SetFilesNeeded(Math.max(0, mock.filesNeeded - index * 8));
+			window.setGmodText("progressText", status);
+		});
+	});
+</script>

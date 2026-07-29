@@ -1,0 +1,184 @@
+@import "@fontsource/oswald/400.css";
+@import "@fontsource/oswald/500.css";
+@import "@fontsource/oswald/700.css";
+
+$font-main: "Oswald", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+$color-page-bg: #0f8fa3;
+$color-text-primary: #fff8e7;
+$color-text-on-accent: #17616f;
+$color-shadow-base: #004a5c;
+$color-panel-bg: rgba(20, 139, 155, 0.72);
+$color-panel-border: rgba(255, 240, 173, 0.7);
+$color-panel-shadow: rgba(2, 55, 73, 0.32);
+$color-card-bg: rgba(127, 213, 202, 0.32);
+$color-card-border: rgba(255, 207, 150, 0.7);
+$color-card-glow: rgba(255, 248, 213, 0.16);
+$color-heading-bg: rgba(255, 225, 122, 0.92);
+
+$color-frame-primary: #ffe17a;
+$color-frame-secondary: #78b159;
+
+//$color-face-bg: #ffb36b;
+//$color-face-border: #fff0ad;
+$color-face-bg: #78b159;
+$color-face-border: #78b159;
+
+$color-highlight-glint: rgba(255, 255, 255, 0.65);
+$color-image-shadow: rgba(0, 74, 92, 0.34);
+$color-face-shadow: rgba(0, 74, 92, 0.28);
+
+$radius-small: 0;
+$radius-walk: 6px;
+$border-thin: 2px;
+$border-image: 0.3rem;
+$border-walk: 4px;
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: $font-main;
+    margin: 0;
+    overflow: hidden;
+    background: $color-page-bg;
+    color: $color-text-primary;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.loading-background__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0;
+    transform: scale(1);
+    animation: fadeInZoom 4s ease-out forwards;
+}
+
+@keyframes fadeInZoom {
+    0% {
+        opacity: 0;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+.centerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: $radius-small;
+    background: $color-panel-bg;
+    border: $border-thin solid $color-panel-border;
+    box-shadow: 0 18px 50px $color-panel-shadow;
+}
+
+.serverName {
+    font-size: 2rem;
+    font-weight: bolder;
+    background: $color-heading-bg;
+    padding: 0.5rem 1rem;
+    border-radius: $radius-small;
+    color: $color-text-on-accent;
+    text-shadow: 0 1px 0 $color-highlight-glint;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: $color-card-bg;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-radius: $radius-small;
+    border: $border-thin solid $color-card-border;
+    box-shadow: inset 0 0 28px $color-card-glow;
+    min-width: 30rem;
+    width: 100%;
+    height: auto;
+}
+
+.card .cardRow {
+    display: flex;
+    gap: 3rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card .text {
+    font-size: 1.5rem;
+    color: $color-text-primary;
+    word-break: keep-all;
+    white-space: nowrap;
+    text-align: center;
+    text-shadow: 0 2px 8px rgba($color-shadow-base, 0.78);
+}
+
+.card .cardImg {
+    display: block;
+    width: 12rem;
+    height: 12rem;
+    flex: 0 0 12rem;
+    max-width: 100%;
+    max-height: 12rem;
+    object-fit: cover;
+    outline: $border-image solid $color-frame-primary;
+    box-shadow: 0 0 0 $border-image $color-frame-secondary, 0 10px 24px $color-image-shadow;
+}
+
+@-webkit-keyframes walk {
+    0% {
+        -webkit-transform: rotateZ(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotateZ(360deg);
+    }
+}
+
+.walk {
+    -webkit-animation: walk 10s linear infinite;
+    flex: 0 0 48px;
+    box-sizing: border-box;
+    text-align: center;
+    background: $color-face-bg;
+    width: 48px;
+    height: 48px;
+    line-height: 40px;
+    color: $color-text-on-accent;
+    font-size: 32px;
+    font-family: arial, sans-serif;
+    font-weight: bold;
+    border-radius: $radius-walk;
+    display: inline-block;
+    border: $border-walk solid $color-face-border;
+    box-shadow: 0 0 0 3px $color-frame-secondary, 0 8px 18px $color-face-shadow;
+    -webkit-transform-origin: 50% 50%;
+}
