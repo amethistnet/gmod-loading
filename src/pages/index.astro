@@ -1,6 +1,7 @@
 ---
 import LoadingMock from "../components/LoadingMock.astro";
 import "../styles/loading-page.scss";
+import Clippy from "../components/Clippy.astro";
 ---
 
 <html lang="en">
@@ -14,6 +15,7 @@ import "../styles/loading-page.scss";
 <div class="loading-background" aria-hidden="true">
     <img class="loading-background__image" data-background-slideshow alt=""/>
 </div>
+<Clippy/>
 <div class="container">
     <div class="centerContainer">
         <p class="serverName" data-server-name></p>

@@ -1,0 +1,101 @@
+---
+
+---
+
+<div class="clippy">
+    <div class="clippy-image">
+        <img src="/img/adachireinerdcroppedcompressed.jpg" alt=""/>
+        <div class="clippy-balloon">
+            <div class="clippy-tip"/>
+            <div data-balloon-text class="clippy-text"/>
+        </div>
+    </div>
+</div>
+
+<script>
+    const messageInterval = 3000;
+    const messages = [
+        "yo whas up im da adachireinerdcroppecompressed.jpg!",
+        "im gonna say it. i did not care for the godfather"
+    ]
+
+    const balloonText = document.querySelector<HTMLElement>("[data-balloon-text]");
+    if (balloonText) {
+        let index = Math.floor(Math.random() * messages.length);
+        balloonText.textContent = messages[index];
+
+        window.setInterval(() => {
+            if (messages.length > 1) {
+                const offset = Math.floor(Math.random() * (messages.length - 1)) + 1;
+                index = (index + offset) % messages.length;
+            }
+
+            balloonText.textContent = messages[index];
+        }, messageInterval);
+    }
+</script>
+
+<style>
+    @font-face {
+        font-family: "Microsoft Sans";
+        src: url("/font/microsoft_sans.ttf") format("truetype");
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+    }
+
+    .clippy {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 1rem;
+    }
+
+    .clippy-image {
+        position: relative;
+    }
+
+    .clippy-image img {
+        display: block;
+    }
+
+    .clippy-balloon {
+        --tip-offset-x: 25px;
+        --tip-width: 10px;
+        --tip-height: 16px;
+
+        position: absolute;
+        top: calc(60% + var(--tip-height));
+        left: calc(50% - var(--tip-offset-x));
+        z-index: 67;
+        background: #FFC;
+        color: black;
+        padding: 8px;
+        border: 1px solid black;
+        border-radius: 5px;
+    }
+
+    .clippy-text {
+        max-width: 240px;
+        min-width: 160px;
+        font-family: "Microsoft Sans", sans-serif;
+        font-size: 11pt;
+        word-break: break-word;
+    }
+
+    .clippy-tip {
+        width: var(--tip-width);
+        height: var(--tip-height);
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAgCAMAAAAlvKiEAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAlQTFRF///MAAAA////52QwgAAAAAN0Uk5T//8A18oNQQAAAGxJREFUeNqs0kEOwCAIRFHn3//QTUU6xMyyxii+jQosrTPkyPEM6IN3FtzIRk1U4dFeKWQiH6pRRowMVKEmvronEynkwj0uZJgR22+YLopPSo9P34wJSamLSU7lSIWLJU7NkNomNlhqxUeAAQC+TQLZyEuJBwAAAABJRU5ErkJggg==) no-repeat;
+        background-size: 20px 32px;
+        image-rendering: pixelated;
+        position: absolute;
+    }
+
+    .clippy-balloon .clippy-tip {
+        top: 0;
+        left: var(--tip-offset-x);
+        transform: translateY(-100%);
+        background-position: -10px -16px;
+    }
+</style>
