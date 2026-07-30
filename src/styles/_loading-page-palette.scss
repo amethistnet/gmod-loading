@@ -1,0 +1,25 @@
+@use "sass:color";
+
+$palette-primary: #19c3c3 !default;
+$palette-accent: #a7e32e !default;
+
+/// do not touch unless adjusting opacity
+$color-page-bg: $palette-primary;
+$color-text-primary: color.mix(#fff, $palette-accent, 84%);
+$color-text-on-accent: color.mix($palette-primary, #00161c, 64%);
+$color-shadow-base: color.mix($palette-primary, #00161c, 32%);
+
+$color-panel-bg: color.change(color.mix($palette-primary, #fff, 92%), $alpha: 0.42);
+$color-panel-border: color.change(color.mix($palette-primary, $palette-accent, 72%), $alpha: 0.4);
+$color-panel-shadow: color.change(color.mix($palette-primary, #00161c, 32%), $alpha: 0.2);
+
+$color-card-bg: color.change(color.mix($palette-primary, $palette-accent, 62%), $alpha: 0.2);
+$color-card-border: color.change(color.mix($palette-primary, $palette-accent, 72%), $alpha: 0.7);
+$color-card-glow: color.change(color.mix(#fff, $palette-accent, 88%), $alpha: 0.16);
+$color-heading-bg: color.change($palette-accent, $alpha: 0.82);
+
+$color-frame-primary: $palette-accent;
+$color-frame-secondary: color.mix($palette-primary, $palette-accent, 46%);
+
+$color-highlight-glint: rgba(255, 255, 255, 0.75);
+$color-image-shadow: color.change(color.mix($palette-primary, #00161c, 32%), $alpha: 0.34);
