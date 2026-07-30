@@ -2,22 +2,16 @@
 
 ---
 
-<div class="clippy">
-    <div class="clippy-image">
-        <img src="/img/adachireinerdcroppedcompressed.jpg" alt=""/>
-        <div class="clippy-balloon">
-            <div class="clippy-tip"/>
-            <div data-balloon-text class="clippy-text"/>
-        </div>
-    </div>
-</div>
-
 <script>
+    import { gmodReady } from "../gmod-client";
+
+    const gmod = await gmodReady;
     const messageInterval = 3000;
+
     const messages = [
         "yo whas up im da adachireinerdcroppecompressed.jpg!",
-        "im gonna say it. i did not care for the godfather"
-    ]
+        `i cant believe we're playing ${gmod.gamemode}`
+    ];
 
     const balloonText = document.querySelector<HTMLElement>("[data-balloon-text]");
     if (balloonText) {
@@ -34,6 +28,18 @@
         }, messageInterval);
     }
 </script>
+
+<div class="clippy">
+    <div class="clippy-image">
+        <img src="/img/adachireinerdcroppedcompressed.jpg" alt=""/>
+        <div class="clippy-balloon">
+            <div class="clippy-tip"/>
+            <div data-balloon-text class="clippy-text"/>
+        </div>
+    </div>
+</div>
+
+
 
 <style>
     @font-face {

@@ -7,6 +7,12 @@ type GmodRender = (values: Readonly<GmodValues>) => string;
 type GmodSubscriber = (values: Readonly<GmodValues>) => void;
 type GmodTarget = string | Element | Element[];
 
+let resolveGmodReady: (values: Readonly<GmodValues>) => void;
+
+export const gmodReady = new Promise<Readonly<GmodValues>>((resolve) => {
+	resolveGmodReady = resolve;
+});
+
 export interface GmodRuntime {
 	attr: (target: GmodTarget, attributeName: string, render: GmodRender) => void;
 	text: (target: GmodTarget, render: GmodRender) => void;
@@ -163,6 +169,8 @@ export function initializeGmodLoading(): GmodRuntime {
 			steamid,
 			volume
 		});
+
+		resolveGmodReady(window.gmod);
 
 		const mockMapImages = window.__loadingMockMapImages || {};
 		const mapImg = mockMapImages[mapname] || "asset://mapimage/" + mapname;
