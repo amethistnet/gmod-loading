@@ -22,6 +22,12 @@ Build the production site to `./dist/`:
 npm run build
 ```
 
+Regenerate `public/images-manifest.json` from the files in `public/images`:
+
+```sh
+npm run images
+```
+
 Preview the production build locally:
 
 ```sh
