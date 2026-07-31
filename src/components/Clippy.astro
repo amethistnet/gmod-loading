@@ -5,60 +5,61 @@
 <script>
     import { gmodReady } from "../gmod-client";
 
-    const gmod = await gmodReady;
     const messageInterval = 3000;
-
-    const messages: string[] = [
-        `${gmod.mapname}???`,
-        "Use 'playermodel_selector' in console to change playermodel and hands!"
-    ];
-
-    switch (gmod.gamemode) {
-        case "sandbox":
-            messages.push("hold C and select your playermodel and hands!");
-            messages.push("the event hasn't started yet...");
-            break;
-        case "terrortown":
-            messages.push("a lot more roles this time so be careful");
-            messages.push("find a brick and throw it at someone");
-            messages.push("morbus weapons are here somehow i can't get rid of them");
-            break;
-        case "morbusreborn":
-            messages.push("if you are the brood alien press C to open the upgrade menu");
-            messages.push("cyborgs don't have needs so use that to your advantage and hunt the aliens");
-            messages.push("custom playermodels aren't around for this one so communication is key");
-            break;
-        case "dropzone":
-            messages.push("remember to press F1 to select spells and abilities (this only works in pre-round or while dead)");
-            messages.push("double tap a movement key to dash");
-            messages.push("airstrafing becomes less effective the higher % you are");
-            messages.push("press E to raise a shield");
-            messages.push("ultimates can only be cast on your last life");
-            break;
-        case "homicide":
-            messages.push("it's like murder, but better(?)");
-            break;
-        case "prop_hunt":
-            messages.push("let's see who spams taunts the most");
-            break;
-        case "pvb":
-            messages.push("this gamemode sucks");
-            break;
-    }
-
     const balloonText = document.querySelector<HTMLElement>("[data-balloon-text]");
-    if (balloonText) {
-        let index = Math.floor(Math.random() * messages.length);
-        balloonText.textContent = messages[index];
 
-        window.setInterval(() => {
-            if (messages.length > 1) {
-                const offset = Math.floor(Math.random() * (messages.length - 1)) + 1;
-                index = (index + offset) % messages.length;
+    if (balloonText) {
+        gmodReady.then((gmod) => {
+            const messages: string[] = [
+                `${gmod.mapname}???`,
+                "Use 'playermodel_selector' in console to change playermodel and hands!"
+            ];
+
+            switch (gmod.gamemode) {
+                case "sandbox":
+                    messages.push("hold C and select your playermodel and hands!");
+                    messages.push("the event hasn't started yet...");
+                    break;
+                case "terrortown":
+                    messages.push("a lot more roles this time so be careful");
+                    messages.push("find a brick and throw it at someone");
+                    messages.push("morbus weapons are here somehow i can't get rid of them");
+                    break;
+                case "morbusreborn":
+                    messages.push("if you are the brood alien press C to open the upgrade menu");
+                    messages.push("cyborgs don't have needs so use that to your advantage and hunt the aliens");
+                    messages.push("custom playermodels aren't around for this one so communication is key");
+                    break;
+                case "dropzone":
+                    messages.push("remember to press F1 to select spells and abilities (this only works in pre-round or while dead)");
+                    messages.push("double tap a movement key to dash");
+                    messages.push("airstrafing becomes less effective the higher % you are");
+                    messages.push("press E to raise a shield");
+                    messages.push("ultimates can only be cast on your last life");
+                    break;
+                case "homicide":
+                    messages.push("it's like murder, but better(?)");
+                    break;
+                case "prop_hunt":
+                    messages.push("let's see who spams taunts the most");
+                    break;
+                case "pvb":
+                    messages.push("this gamemode sucks");
+                    break;
             }
 
+            let index = Math.floor(Math.random() * messages.length);
             balloonText.textContent = messages[index];
-        }, messageInterval);
+
+            window.setInterval(() => {
+                if (messages.length > 1) {
+                    const offset = Math.floor(Math.random() * (messages.length - 1)) + 1;
+                    index = (index + offset) % messages.length;
+                }
+
+                balloonText.textContent = messages[index];
+            }, messageInterval);
+        });
     }
 </script>
 
@@ -67,7 +68,7 @@
         <img src="/img/adachireinerdcroppedcompressed.jpg" alt=""/>
         <div class="clippy-balloon">
             <div class="clippy-tip"/>
-            <div data-balloon-text class="clippy-text"/>
+            <div data-balloon-text class="clippy-text">Loading server details...</div>
         </div>
     </div>
 </div>
