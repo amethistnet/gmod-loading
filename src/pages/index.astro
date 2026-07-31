@@ -2,6 +2,8 @@
 import LoadingMock from "../components/LoadingMock.astro";
 import "../styles/loading-page.scss";
 import Clippy from "../components/Clippy.astro";
+
+const showLoadingMock = import.meta.env.DEV;
 ---
 
 <html lang="en">
@@ -41,6 +43,6 @@ import Clippy from "../components/Clippy.astro";
     initializeLoadingPage();
 </script>
 
-<LoadingMock/>
+{showLoadingMock && <LoadingMock/>}
 </body>
 </html>
